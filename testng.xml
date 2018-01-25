@@ -1,0 +1,12 @@
+<!--
+  ~ Criado para fins de testes, pode usar e compartilhar desde que não cobre por isso
+  -->
+
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="backend">
+    <test name="MVP_01" preserve-order="true">
+        <classes>
+            <class name="LoginFarfetch"/>
+        </classes>
+    </test>
+</suite>
