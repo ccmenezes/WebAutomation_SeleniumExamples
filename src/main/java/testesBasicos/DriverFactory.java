@@ -36,7 +36,7 @@ public class DriverFactory {
     }
 
     private WebDriver generateFirefoxDriver() {
-        System.setProperty("webdriver.gecko.driver", "src/main/resources/webDrivers/geckodriver");
+        setWebDriver(System.getProperty("os.name"));
         driver = new FirefoxDriver();
         driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
         driver.manage().window().maximize();
@@ -44,8 +44,25 @@ public class DriverFactory {
 
     }
 
+    private void setWebDriver(String osName) {
+
+        if (osName.equals("Mac OS X")) {
+            System.setProperty("webdriver.chrome.driver", "src/main/resources/webDrivers/osx/chromedriver");
+            System.setProperty("webdriver.gecko.driver", "src/main/resources/webDrivers/osx/geckodriver");
+
+        } else if (osName.equals("Linux")) {
+            System.setProperty("webdriver.chrome.driver", "src/main/resources/webDrivers/linux/chromedriver");
+            System.setProperty("webdriver.gecko.driver", "src/main/resources/webDrivers/linux/geckodriver");
+
+        } else if (osName.contains("Windows")) {
+        } else {
+            System.out.println(osName);
+        }
+
+    }
+
     private WebDriver generateChromeDriver() {
-        System.setProperty("webdriver.chrome.driver", "src/main/resources/webDrivers/chromedriver");
+        setWebDriver(System.getProperty("os.name"));
         ChromeOptions chromeOptions = new ChromeOptions().addArguments();
         chromeOptions.addArguments("--start-maximized");
         driver = new ChromeDriver(chromeOptions);
